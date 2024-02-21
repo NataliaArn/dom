@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>dom-instr</title>
+</head>
+
+<body>
+    <ul>
+        <li>Gato <em>lindo</em></li>
+        <li>Cuenta <span>0</span></li>
+    </ul>
+    <div>
+        <p><em>Hola</em></p>
+    </div>
+    <div>
+        <ul>
+            BLAH
+            <li>Oso feliz</li>
+            <li>Vaca <em>loca</em></li>
+        </ul>
+        <p>Adiós</p>
+    </div>
+    <script>
+        //2
+        let segundaLista = document.body.querySelector("div > ul:last-of-type");
+        let parrafosAdios = document.body.querySelectorAll("div > p");
+
+        let parrafoAdios = parrafosAdios[1];
+        parrafoAdios.parentNode.insertBefore(segundaLista, parrafoAdios.nextSibling);
+
+        //3
+        let oso = document.body.querySelector("div > ul:last-of-type li:first-of-type");
+
+        oso.textContent += " y contento";
+
+        //4
+        let botonBorrar = document.createElement("button");
+        botonBorrar.textContent = "Borra";
+
+        let parrafoHola = document.querySelector("div > p");
+        parrafoHola.parentNode.insertBefore(botonBorrar, parrafoHola.nextSibling);
+
+        //5
+        function ButtonClick() {
+
+            let cuentaElement = document.querySelector("li:nth-of-type(2) span");
+            cuentaElement.textContent = +cuentaElement.textContent + 1;
+
+
+            let primerEm = document.querySelector("em");
+            if (primerEm) {
+                primerEm.parentNode.removeChild(primerEm);
+            }
+        }
+
+        let botonBorrarExistente = document.querySelector("button");
+        botonBorrarExistente.onclick = ButtonClick;
+
+        //6
+        let SegundaLista = document.querySelectorAll("div > ul:last-of-type li");
+
+        //list element (item) = solo li // html element = también em // texto no es elemento
+        //mirar bubbling and capturing y event delegation
+        SegundaLista.forEach((elemento) => {
+            elemento.addEventListener("click", () => {
+
+                elemento.style.backgroundColor = "yellow";
+
+                let boton = document.querySelector("button");
+                boton.style.color = boton.style.color === "red" ? "black" : "red";
+            });
+        });
+
+    </script>
+</body>
+
+</html>
