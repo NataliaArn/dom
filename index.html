@@ -74,6 +74,16 @@
             });
         });
 
+        //setimeout y setinterval
+        const id = setTimeout(() => {
+            alert('Muerto!');
+        }, 4000);
+
+        document.querySelector('button').onclick = () => {
+            alert('UF');
+            clearTimeout(id);
+        }
+
     </script>
 </body>
 
